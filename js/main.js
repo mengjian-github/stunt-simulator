@@ -16,6 +16,7 @@
         initAnalytics();
         initGameTracking();
         initLazyLoad();
+        initScrollSpy();
         welcomeMessage();
     }
 
@@ -307,5 +308,38 @@
         });
     }
     updateActiveNav();
+
+    // ========== Scroll Spy for Navigation ==========
+    function initScrollSpy() {
+        const sections = document.querySelectorAll('[id]');
+        const navLinks = document.querySelectorAll('.nav a[href^="#"]');
+
+        if (sections.length === 0 || navLinks.length === 0) return;
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px',
+            threshold: 0
+        };
+
+        const observerCallback = (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        const href = link.getAttribute('href');
+                        if (href === `#${id}`) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+        sections.forEach(section => observer.observe(section));
+    }
 
 })();
