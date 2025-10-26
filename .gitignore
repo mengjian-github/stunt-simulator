@@ -1,41 +1,31 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Stunt Simulator - Git Ignore File
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
-
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
+# macOS
 .DS_Store
-*.pem
+.AppleDouble
+.LSOverride
 
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
 
-# env files (can opt-in for committing if needed)
-.env*
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 
-# vercel
-.vercel
+# Temporary files
+*.tmp
+*.bak
+*.log
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# Don't ignore specific files needed for site
+!robots.txt
+!sitemap.xml
+
+ref-pages/
+
+tools/

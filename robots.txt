@@ -1,0 +1,8 @@
+# robots.txt for stunt-simulator.com
+# Generated on 2025-10-26
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://stunt-simulator.com/sitemap.xml
