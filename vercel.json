@@ -1,0 +1,7 @@
+{
+  // Redirect bad trailing-slash variants like /page.html/ -> /page.html
+  "redirects": [
+    { "source": "/:path*.html/", "destination": "/:path*.html", "permanent": true }
+  ]
+}
+
