@@ -7,6 +7,18 @@
         <priority>1.0</priority>
     </url>
     <url>
+        <loc>https://stunt-simulator.com/stunt-simulator-2-unblocked.html</loc>
+        <lastmod>2025-11-05</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.95</priority>
+    </url>
+    <url>
+        <loc>https://stunt-simulator.com/stunt-simulator-2-play-google.html</loc>
+        <lastmod>2025-11-05</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
         <loc>https://stunt-simulator.com/games/crazy-drift.html</loc>
         <lastmod>2025-11-05</lastmod>
         <changefreq>weekly</changefreq>
