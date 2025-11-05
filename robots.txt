@@ -1,5 +1,5 @@
 # robots.txt for stunt-simulator.com
-# Generated on 2025-10-26
+# Generated on 2025-11-05
 
 User-agent: *
 Allow: /
