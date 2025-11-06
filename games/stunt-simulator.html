@@ -60,6 +60,8 @@
                             <li><a href="/">Home</a></li>
                             <li><a href="#how-to-play">Guide</a></li>
                             <li><a href="#faq">FAQ</a></li>
+                            <li><a href="/stunt-simulator-2-unblocked.html">Unblocked</a></li>
+                            <li><a href="/stunt-simulator-2-play-google.html">Google/Mobile</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -232,5 +234,34 @@
             </footer>
             <script src="../js/games-data.js"></script>
             <script src="../js/main.js"></script>
+            <!-- Breadcrumbs for inner game page -->
+            <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://stunt-simulator.com/"},
+                {"@type": "ListItem", "position": 2, "name": "Stunt Simulator", "item": "https://stunt-simulator.com/games/stunt-simulator.html"}
+              ]
+            }
+            </script>
+
+            <!-- FAQ rich results for Stunt Simulator classic page -->
+            <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {"@type": "Question", "name": "What’s different about the original Stunt Simulator?",
+                 "acceptedAnswer": {"@type": "Answer", "text": "The classic version focuses on open arenas and instant vehicle swaps for practicing loops, drifts, and flips."}},
+                {"@type": "Question", "name": "Does Stunt Simulator still support instant resets?",
+                 "acceptedAnswer": {"@type": "Answer", "text": "Yes. Quick reset hotkeys put you back on track so you can keep building combos."}},
+                {"@type": "Question", "name": "Can I play Stunt Simulator without installs?",
+                 "acceptedAnswer": {"@type": "Answer", "text": "You can play directly in your browser with no downloads required."}},
+                {"@type": "Question", "name": "Is a controller supported in Stunt Simulator?",
+                 "acceptedAnswer": {"@type": "Answer", "text": "Most modern gamepads work out of the box, and you can remap controls."}}
+              ]
+            }
+            </script>
         </body>
         </html>
