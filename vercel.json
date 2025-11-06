@@ -4,7 +4,7 @@
     {
       "source": "/:path(.*\\.html)/",
       "destination": "/:path",
-      "permanent": true
+      "statusCode": 301
     }
   ]
 }
