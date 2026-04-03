@@ -4,6 +4,17 @@
     <!-- Plausible (self-hosted) -->
     <script async src="https://plausible.shipsolo.io/js/pa-epSN3SSm4IKRSzs7w9BUG.js"></script>
     <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}}; plausible.init()</script>
+    <script>
+    document.addEventListener("DOMContentLoaded",function(){
+      var iframe=document.querySelector(".game-iframe");
+      if(iframe){iframe.addEventListener("load",function(){plausible("play_start",{props:{game:"stunt-simulator-2"}})});}
+      var fsBtn=document.getElementById("fullscreenBtn");
+      if(fsBtn){fsBtn.addEventListener("click",function(){plausible("fullscreen_click",{props:{game:"stunt-simulator-2"}})});}
+      document.querySelectorAll(".game-card").forEach(function(card){
+        card.addEventListener("click",function(){plausible("game_card_click",{props:{destination:card.getAttribute("href"),label:card.querySelector("h3")?.textContent||""}})});
+      });
+    });
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stunt Simulator 2 — Play Online (Web Version) | Google Play Info</title>
