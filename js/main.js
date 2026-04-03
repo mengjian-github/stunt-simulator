@@ -203,9 +203,10 @@
         document.querySelectorAll('.game-card').forEach(function(card, index) {
             card.addEventListener('click', function() {
                 const gameName = this.querySelector('h3')?.textContent || 'Unknown';
-                trackEvent('related_game_click', {
+                trackEvent('tool_entry_click', {
                     event_category: 'navigation',
                     event_label: gameName,
+                    location: 'related_game_card',
                     value: index + 1
                 });
             });
@@ -215,12 +216,53 @@
         document.querySelectorAll('.btn').forEach(function(btn) {
             if (btn.id !== 'fullscreenBtn') {
                 btn.addEventListener('click', function() {
-                    trackEvent('cta_click', {
+                    const label = this.textContent.trim();
+                    trackEvent(label.toLowerCase().includes('restart') || label.toLowerCase().includes('reload') ? 'tool_start_click' : 'cta_click', {
                         event_category: 'engagement',
-                        event_label: this.textContent.trim()
+                        event_label: label,
+                        location: this.id || 'button'
                     });
                 });
             }
+        });
+
+        // Track key navigation and outbound clicks
+        document.querySelectorAll('a[href]').forEach(function(link) {
+            link.addEventListener('click', function() {
+                const href = this.getAttribute('href') || '';
+                const label = this.textContent.trim().replace(/\s+/g, ' ').slice(0, 80) || href;
+                const isExternal = /^https?:\/\//.test(href) || href.startsWith('mailto:');
+                const isToolEntry = href.includes('unblocked') || href.includes('play-google') || href.includes('/games/') || href === '/#play';
+
+                if (isExternal) {
+                    trackEvent('outbound_click', {
+                        event_category: 'navigation',
+                        event_label: label,
+                        destination: href,
+                        location: this.closest('.footer') ? 'footer' : 'content'
+                    });
+                    return;
+                }
+
+                if (isToolEntry) {
+                    trackEvent('tool_entry_click', {
+                        event_category: 'navigation',
+                        event_label: label,
+                        destination: href,
+                        location: this.closest('.header') ? 'header' : this.closest('.footer') ? 'footer' : 'content'
+                    });
+                    return;
+                }
+
+                if (href.startsWith('#') || href.startsWith('/')) {
+                    trackEvent('navigation_click', {
+                        event_category: 'navigation',
+                        event_label: label,
+                        destination: href,
+                        location: this.closest('.header') ? 'header' : this.closest('.footer') ? 'footer' : 'content'
+                    });
+                }
+            });
         });
     }
 
@@ -250,6 +292,18 @@
     function trackEvent(eventName, params) {
         if (typeof gtag !== 'undefined') {
             gtag('event', eventName, params);
+        }
+
+        if (typeof window !== 'undefined' && typeof window.plausible === 'function') {
+            const props = {};
+            Object.entries(params || {}).forEach(([key, value]) => {
+                if (value !== undefined && value !== null) {
+                    props[key] = value;
+                }
+            });
+            props.page = window.location.pathname || '/';
+            props.game = gameSlug;
+            window.plausible(eventName, { props });
         }
     }
 
