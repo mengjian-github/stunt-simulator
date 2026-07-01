@@ -234,6 +234,17 @@
                     variant: gameVariant,
                     source: 'iframe_load_event'
                 });
+                window.setTimeout(function() {
+                    if (playStarted && iframeLoaded && !document.hidden) {
+                        trackEvent('qualified_play_session', {
+                            event_category: 'game',
+                            event_label: gameSlug,
+                            variant: gameVariant,
+                            source: 'iframe_visible_45s',
+                            value: 45
+                        });
+                    }
+                }, 45000);
             });
 
             gameIframe.addEventListener('error', function() {
