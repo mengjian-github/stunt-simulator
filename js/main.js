@@ -4,13 +4,19 @@
 (function() {
     'use strict';
 
-    let gameSlug = 'stunt-simulator-2';
+    let gameSlug = 'stunt-simulator';
+    let gameVariant = 'stunt-simulator-2';
 
     // Wait for DOM to be fully loaded
     document.addEventListener('DOMContentLoaded', init);
 
     function init() {
-        gameSlug = document.body.dataset.gameSlug || 'stunt-simulator-2';
+        gameSlug = document.body.dataset.gameSlug || 'stunt-simulator';
+        gameVariant = document.body.dataset.gameVariant || gameSlug;
+        window.__moxiReviewProps = {
+            moxi_review: 'auto_optimization_20260701',
+            viewport_bucket: getViewportBucket()
+        };
         initFullscreen();
         initSmoothScroll();
         initAnalytics();
@@ -47,9 +53,10 @@
             }
 
             // Track fullscreen toggle
-            trackEvent('fullscreen_toggle', {
+            trackEvent('fullscreen_click', {
                 event_category: 'game_interaction',
-                event_label: gameSlug
+                event_label: gameSlug,
+                variant: gameVariant
             });
         }
 
@@ -180,14 +187,57 @@
     // ========== Game Tracking ==========
     function initGameTracking() {
         const gameIframe = document.querySelector('.game-iframe');
+        const gameStatus = document.getElementById('gameStatus');
+        const startGameBtn = document.getElementById('startGameBtn');
 
         if (gameIframe) {
-            // Track when game loads
-            gameIframe.addEventListener('load', function() {
-                trackEvent('game_loaded', {
-                    event_category: 'game',
-                    event_label: gameSlug
+            let iframeLoaded = false;
+            let playStarted = false;
+            const timeoutMs = 12000;
+
+            if (startGameBtn) {
+                startGameBtn.addEventListener('click', function() {
+                    if (playStarted) return;
+                    playStarted = true;
+                    iframeLoaded = false;
+                    const src = gameIframe.dataset.gameSrc || gameIframe.getAttribute('src');
+                    if (src) {
+                        gameIframe.setAttribute('src', src);
+                    }
+                    if (gameStatus) {
+                        gameStatus.innerHTML = '<strong>Loading the Stunt Simulator player…</strong><span>If WebGL or the school network blocks the embed, use a fallback below instead of staring at an error screen.</span>';
+                    }
+                    trackEvent('play_start', {
+                        event_category: 'game',
+                        event_label: gameSlug,
+                        variant: gameVariant,
+                        source: 'embedded_iframe_start_button'
+                    });
+                    window.setTimeout(function() {
+                        if (playStarted && !iframeLoaded) {
+                            showGameFallback('embed_timeout', 'The player is taking too long. Try Direct Play, Original Stunt Simulator, Multiplayer, or WebGL Help.');
+                        }
+                    }, timeoutMs);
                 });
+            }
+
+            gameIframe.addEventListener('load', function() {
+                if (!playStarted) return;
+                iframeLoaded = true;
+                if (gameStatus) {
+                    gameStatus.classList.add('is-loaded');
+                    gameStatus.innerHTML = '<strong>Player frame loaded.</strong><span>If the Unity/WebGL screen inside the frame still reports a compatibility error, use Try Direct Play or the fallback cards.</span>';
+                }
+                trackEvent('iframe_loaded', {
+                    event_category: 'game',
+                    event_label: gameSlug,
+                    variant: gameVariant,
+                    source: 'iframe_load_event'
+                });
+            });
+
+            gameIframe.addEventListener('error', function() {
+                showGameFallback('iframe_error', 'The embedded player failed to load. Try Direct Play or choose another fallback.');
             });
 
             // Track game clicks
@@ -196,6 +246,51 @@
                     event_category: 'game',
                     event_label: gameSlug
                 });
+            });
+        }
+
+        document.querySelectorAll('.direct-play-link').forEach(function(link) {
+            link.addEventListener('click', function() {
+                trackEvent('direct_play_click', {
+                    event_category: 'game_fallback',
+                    event_label: gameSlug,
+                    variant: gameVariant,
+                    destination: this.getAttribute('href') || ''
+                });
+            });
+        });
+
+        document.querySelectorAll('.fallback-card').forEach(function(link) {
+            link.addEventListener('click', function() {
+                const href = this.getAttribute('href') || '';
+                let eventName = 'fallback_click';
+                if (href.includes('/games/stunt-simulator')) eventName = 'fallback_original_click';
+                if (href === '#webgl-help') eventName = 'webgl_help_view';
+                if (href.includes('play-google')) eventName = 'mobile_google_click';
+                const props = {
+                    event_category: 'game_fallback',
+                    event_label: this.querySelector('strong')?.textContent || 'fallback',
+                    game: gameSlug,
+                    variant: gameVariant,
+                    destination: href
+                };
+                trackEvent('fallback_click', props);
+                if (eventName !== 'fallback_click') {
+                    trackEvent(eventName, props);
+                }
+            });
+        });
+
+        function showGameFallback(reason, message) {
+            if (gameStatus) {
+                gameStatus.classList.add('is-error');
+                gameStatus.innerHTML = '<strong>Having trouble loading Stunt Simulator?</strong><span>' + message + '</span>';
+            }
+            trackEvent('game_error', {
+                event_category: 'game',
+                event_label: gameSlug,
+                variant: gameVariant,
+                reason: reason
             });
         }
 
@@ -232,7 +327,7 @@
                 const href = this.getAttribute('href') || '';
                 const label = this.textContent.trim().replace(/\s+/g, ' ').slice(0, 80) || href;
                 const isExternal = /^https?:\/\//.test(href) || href.startsWith('mailto:');
-                const isToolEntry = href.includes('unblocked') || href.includes('play-google') || href.includes('/games/') || href === '/#play';
+                const isToolEntry = href.includes('unblocked') || href.includes('play-google') || href.includes('/games/') || href === '/#play' || href === '#play';
 
                 if (isExternal) {
                     trackEvent('outbound_click', {
@@ -251,6 +346,14 @@
                         destination: href,
                         location: this.closest('.header') ? 'header' : this.closest('.footer') ? 'footer' : 'content'
                     });
+                    if (href.includes('play-google')) {
+                        trackEvent('mobile_google_click', {
+                            event_category: 'navigation',
+                            event_label: label,
+                            destination: href,
+                            location: this.closest('.header') ? 'header' : this.closest('.footer') ? 'footer' : 'content'
+                        });
+                    }
                     return;
                 }
 
@@ -290,6 +393,7 @@
 
     // ========== Utility Functions ==========
     function trackEvent(eventName, params) {
+        params = Object.assign({}, window.__moxiReviewProps || {}, params || {});
         if (typeof gtag !== 'undefined') {
             gtag('event', eventName, params);
         }
@@ -302,9 +406,18 @@
                 }
             });
             props.page = window.location.pathname || '/';
-            props.game = gameSlug;
+            props.game = props.game || gameSlug;
+            props.variant = props.variant || gameVariant;
             window.plausible(eventName, { props });
         }
+    }
+
+    function getViewportBucket() {
+        const width = window.innerWidth || document.documentElement.clientWidth || 0;
+        if (width <= 390) return 'mobile_390';
+        if (width <= 480) return 'mobile';
+        if (width <= 768) return 'tablet';
+        return 'desktop';
     }
 
     function throttle(func, wait) {

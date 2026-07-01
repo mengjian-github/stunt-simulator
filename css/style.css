@@ -617,6 +617,136 @@ a:hover {
 .mb-1 { margin-bottom: 1rem; }
 .mb-2 { margin-bottom: 2rem; }
 
+/* ========== Play Path Closeout ========== */
+.eyebrow {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.95rem !important;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 0.75rem !important;
+    text-transform: uppercase;
+}
+
+.play-note {
+    color: rgba(255, 255, 255, 0.82);
+    margin: -0.5rem auto 1rem;
+    max-width: 900px;
+    text-align: center;
+}
+
+.game-status {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid rgba(255, 215, 0, 0.5);
+    border-radius: 10px;
+    background: rgba(15, 15, 30, 0.9);
+    color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(8px);
+}
+
+.game-status strong { color: var(--gold); }
+.game-status span { font-size: 0.92rem; }
+.game-status.is-loaded { opacity: 0.78; border-color: rgba(22, 199, 154, 0.5); }
+.game-status.is-loaded strong { color: var(--accent); }
+.game-status.is-error { border-color: rgba(255, 70, 85, 0.8); background: rgba(60, 10, 18, 0.92); }
+.game-status.is-error strong { color: var(--primary); }
+
+.btn-tertiary {
+    background: linear-gradient(135deg, #ffd700 0%, #ff9f1c 100%);
+    color: var(--text-dark);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.28);
+}
+
+.fallback-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.9rem;
+    margin-top: 1rem;
+}
+
+.fallback-card {
+    display: flex;
+    min-height: 118px;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 1rem;
+    border: 1px solid rgba(22, 199, 154, 0.35);
+    border-radius: 12px;
+    background: rgba(22, 199, 154, 0.08);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.fallback-card:hover {
+    border-color: var(--accent);
+    background: rgba(22, 199, 154, 0.16);
+    transform: translateY(-2px);
+}
+
+.fallback-card strong {
+    color: var(--accent);
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.fallback-card span {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.quick-controls {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin: 0 !important;
+}
+
+.quick-controls li {
+    list-style: none;
+    margin: 0 !important;
+    padding: 0.85rem;
+    border: 1px solid rgba(255, 70, 85, 0.28);
+    border-radius: 10px;
+    background: rgba(255, 70, 85, 0.07);
+}
+
+.legal-page {
+    width: min(1040px, calc(100% - 32px));
+    margin: 2rem auto;
+}
+
+.legal-hero {
+    text-align: left;
+}
+
+.legal-hero .hero-content {
+    max-width: 820px;
+}
+
+.legal-section {
+    display: grid;
+    gap: 0.85rem;
+}
+
+.legal-section h2 {
+    color: var(--accent);
+    margin-top: 0.65rem;
+}
+
+.legal-section ul {
+    padding-left: 1.2rem;
+}
+
+.legal-section li {
+    margin-bottom: 0.45rem;
+}
+
 /* ========== Responsive Design ========== */
 @media (max-width: 1024px) {
     .main-layout {
@@ -657,7 +787,34 @@ a:hover {
     }
 
     .game-wrapper {
-        padding: 1.5rem;
+        padding: 1rem;
+    }
+
+    .game-wrapper h2 {
+        font-size: 1.35rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .play-note {
+        font-size: 0.95rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .game-container {
+        padding-bottom: 58%;
+    }
+
+    .game-controls {
+        gap: 0.55rem;
+        margin-top: 0.75rem;
+    }
+
+    .fallback-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .quick-controls {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .content-section {
@@ -671,7 +828,17 @@ a:hover {
     }
 
     .hero h1 {
-        font-size: 1.8rem;
+        font-size: 1.55rem;
+    }
+
+    .hero {
+        padding: 0.9rem 0.8rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .hero p {
+        font-size: 0.98rem;
+        line-height: 1.5;
     }
 
     .logo {
@@ -679,8 +846,48 @@ a:hover {
     }
 
     .btn {
-        padding: 12px 24px;
-        font-size: 0.95rem;
+        min-height: 44px;
+        padding: 10px 14px;
+        font-size: 0.82rem;
+    }
+
+    .main-layout {
+        margin: 1rem auto;
+        padding: 0 10px;
+        gap: 1rem;
+    }
+
+    .game-container {
+        padding-bottom: 45%;
+    }
+
+    .game-wrapper h2 {
+        font-size: 1.15rem;
+    }
+
+    .play-note {
+        display: none;
+    }
+
+    .game-status {
+        left: 8px;
+        right: 8px;
+        bottom: 8px;
+        padding: 0.65rem;
+    }
+
+    .game-status span {
+        display: none;
+    }
+
+    .fallback-grid {
+        grid-template-columns: 1fr;
+        gap: 0.6rem;
+    }
+
+    .fallback-card {
+        min-height: auto;
+        padding: 0.75rem;
     }
 }
 

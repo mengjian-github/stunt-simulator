@@ -5,27 +5,17 @@
     <script async src="https://plausible.shipsolo.io/js/pa-epSN3SSm4IKRSzs7w9BUG.js"></script>
     <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}}; plausible.init()</script>
     <script>
-    document.addEventListener('DOMContentLoaded',function(){
-      // Track game iframe load (play_start)
-      var iframe=document.querySelector('.game-iframe');
-      if(iframe){iframe.addEventListener('load',function(){plausible('play_start',{props:{game:'stunt-simulator-2'}})});}
-      // Track fullscreen click
-      var fsBtn=document.getElementById('fullscreenBtn');
-      if(fsBtn){fsBtn.addEventListener('click',function(){plausible('fullscreen_click',{props:{game:'stunt-simulator-2'}})});}
-      // Track game card clicks (outbound to other games)
-      document.querySelectorAll('.game-card').forEach(function(card){
-        card.addEventListener('click',function(){plausible('game_card_click',{props:{destination:card.getAttribute('href'),label:card.querySelector('h3')?.textContent||''}})});
-      });
-      // Track guide section expand (scroll into view)
-      var guide=document.getElementById('how-to-play');
-      if(guide){var obs=new IntersectionObserver(function(e){if(e[0].isIntersecting){plausible('guide_view',{props:{section:'how-to-play'}});obs.disconnect();}},{threshold:0.3});obs.observe(guide);}
-    });
+    window.STUNT_GAME_CONFIG = {
+      game: 'stunt-simulator',
+      variant: 'stunt-simulator-2',
+      directPlayUrl: 'https://unblocked-games.s3.amazonaws.com/games/2021/unity3/stunt-simulator-2/index.html'
+    };
     </script>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Stunt Simulator 2 — Play Free Online (Unblocked)</title>
-            <meta name="description" content="Play Stunt Simulator 2 free in your browser — no download. Drive 10 vehicles across 6 maps, use nitro for flips, and switch camera views.">
-            <meta name="keywords" content="Stunt Simulator 2, play online, unblocked, free, browser game, car stunt game">
+            <title>Stunt Simulator — Play Free Online, No Download</title>
+            <meta name="description" content="Play Stunt Simulator free online with no download: 10 vehicles, stunt maps, simple controls, unblocked access, direct play fallback, and WebGL help.">
+            <meta name="keywords" content="Stunt Simulator, play stunt simulator free, no download, unblocked, 10 vehicles, stunt maps, controls, webgl help">
             <link rel="canonical" href="https://stunt-simulator.com/">
             <link rel="icon" type="image/x-icon" href="/favicon.ico">
             <link rel="stylesheet" href="css/style.css">
@@ -35,13 +25,13 @@
             <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
             <link rel="preconnect" href="https://www.clarity.ms" crossorigin>
             <meta property="og:type" content="website">
-            <meta property="og:title" content="Stunt Simulator 2 — Play Free Online (Unblocked)">
-            <meta property="og:description" content="Play Stunt Simulator 2 free in your browser — no download. Drive 10 vehicles across 6 maps, use nitro for flips, and switch camera views.">
+            <meta property="og:title" content="Stunt Simulator — Play Free Online, No Download">
+            <meta property="og:description" content="Play Stunt Simulator free in your browser with 10 vehicles, stunt maps, controls, unblocked access, direct play fallback, and WebGL help.">
             <meta property="og:url" content="https://stunt-simulator.com/">
             <meta property="og:image" content="https://unblocked-games.s3.amazonaws.com/media/posts/18/stuntsimulator.jpg">
             <meta name="twitter:card" content="summary_large_image">
-            <meta name="twitter:title" content="Stunt Simulator 2 — Play Free Online (Unblocked)">
-            <meta name="twitter:description" content="Play Stunt Simulator 2 free in your browser — no download. Drive 10 vehicles across 6 maps, use nitro for flips, and switch camera views.">
+            <meta name="twitter:title" content="Stunt Simulator — Play Free Online, No Download">
+            <meta name="twitter:description" content="Play Stunt Simulator free in your browser with 10 vehicles, stunt maps, controls, unblocked access, direct play fallback, and WebGL help.">
             <meta name="twitter:image" content="https://unblocked-games.s3.amazonaws.com/media/posts/18/stuntsimulator.jpg">
             <meta name="twitter:url" content="https://stunt-simulator.com/">
             <!-- Google tag (gtag.js) -->
@@ -63,19 +53,19 @@
             {
                 "@context": "https://schema.org",
                 "@type": "VideoGame",
-                "name": "Stunt Simulator 2",
+                "name": "Stunt Simulator",
                 "url": "https://stunt-simulator.com/",
                 "applicationCategory": "GameApplication",
                 "operatingSystem": "Web",
                 "genre": "Racing",
                 "playMode": ["SinglePlayer", "MultiPlayer"],
-                "description": "Play Stunt Simulator 2 free in your browser — no download. Drive 10 vehicles across 6 maps and pull nitro-powered flips."
+                "description": "Play Stunt Simulator free in your browser with no download. The page embeds Stunt Simulator 2 as the playable variant and includes direct play, original game, multiplayer, and WebGL help fallbacks."
             }
             </script>
             <!-- Bing Webmaster verification -->
             <meta name="msvalidate.01" content="6D04C0CF71CB641A889182A413BFF94E" />
         </head>
-        <body data-game-slug="stunt-simulator-2">
+        <body data-game-slug="stunt-simulator" data-game-variant="stunt-simulator-2">
             <header class="header">
                 <div class="header-container">
                     <a href="/" class="logo">
@@ -84,11 +74,12 @@
                     </a>
                     <nav class="nav">
                         <ul>
-                            <li><a href="/">Home</a></li>
-                            <li><a href="#how-to-play">Guide</a></li>
+                            <li><a href="/#play">Play</a></li>
+                            <li><a href="#controls">Controls</a></li>
+                            <li><a href="#fallbacks">Fallbacks</a></li>
                             <li><a href="#faq">FAQ</a></li>
-                            <li><a href="/stunt-simulator-2-unblocked.html">Unblocked</a></li>
-                            <li><a href="/stunt-simulator-2-play-google.html">Google/Mobile</a></li>
+                            <li><a href="/stunt-simulator-2-unblocked">Unblocked</a></li>
+                            <li><a href="/stunt-simulator-2-play-google">Google/Mobile</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -97,19 +88,19 @@
                 <aside class="sidebar">
                     <h3>All Games</h3>
                     <ul class="sidebar-games">
-                        <li><a href="/" class="active">Stunt Simulator 2</a></li>
-<li><a href="/games/stunt-simulator.html" class="">Stunt Simulator</a></li>
-<li><a href="/games/madalin-stunt-cars-2.html" class="">Madalin Stunt Cars 2</a></li>
-<li><a href="/games/gt-cars-mega-ramps.html" class="">GT Cars Mega Ramps</a></li>
-<li><a href="/games/stunt-paradise.html" class="">Stunt Paradise</a></li>
-<li><a href="/games/night-city-racing.html" class="">Night City Racing</a></li>
-<li><a href="/games/mr-racer-stunt-mania.html" class="">MR RACER Stunt Mania</a></li>
-<li><a href="/games/rally-racer-dirt.html" class="">Rally Racer Dirt</a></li>
-<li><a href="/games/crazy-drift.html" class="">Crazy Drift</a></li>
-<li><a href="/games/moto-x3m.html" class="">Moto X3M</a></li>
-<li><a href="/games/moto-x3m-spooky-land.html" class="">Moto X3M 6: Spooky Land</a></li>
-<li><a href="/games/demolition-derby-3.html" class="">Demolition Derby 3</a></li>
-<li><a href="/games/hyper-cars-ramp-crash.html" class="">Hyper Cars Ramp Crash</a></li>
+                        <li><a href="/" class="active">Stunt Simulator</a></li>
+<li><a href="/games/stunt-simulator" class="">Stunt Simulator</a></li>
+<li><a href="/games/madalin-stunt-cars-2" class="">Madalin Stunt Cars 2</a></li>
+<li><a href="/games/gt-cars-mega-ramps" class="">GT Cars Mega Ramps</a></li>
+<li><a href="/games/stunt-paradise" class="">Stunt Paradise</a></li>
+<li><a href="/games/night-city-racing" class="">Night City Racing</a></li>
+<li><a href="/games/mr-racer-stunt-mania" class="">MR RACER Stunt Mania</a></li>
+<li><a href="/games/rally-racer-dirt" class="">Rally Racer Dirt</a></li>
+<li><a href="/games/crazy-drift" class="">Crazy Drift</a></li>
+<li><a href="/games/moto-x3m" class="">Moto X3M</a></li>
+<li><a href="/games/moto-x3m-spooky-land" class="">Moto X3M 6: Spooky Land</a></li>
+<li><a href="/games/demolition-derby-3" class="">Demolition Derby 3</a></li>
+<li><a href="/games/hyper-cars-ramp-crash" class="">Hyper Cars Ramp Crash</a></li>
                     </ul>
                     <div class="sidebar-category">
                         <h4>🎯 Categories</h4>
@@ -122,25 +113,49 @@
                     </div>
                 </aside>
                 <main class="main-content">
-                    <div class="hero">
+                    <div class="hero exact-intent-hero">
                         <div class="hero-content">
-                            <h1>Stunt Simulator 2 — Play Online Free</h1>
-                            <p>Master loops, drifts, and freestyle tricks across six intense maps with ten outrageous stunt vehicles in Stunt Simulator 2.</p>
+                            <p class="eyebrow">No download · unblocked access · browser stunt driving</p>
+                            <h1>Stunt Simulator — Play Online Free</h1>
+                            <p>Start Stunt Simulator in your browser, drive 10 stunt vehicles across ramp maps, learn the controls fast, and use direct-play fallbacks if WebGL or iframe loading gets blocked.</p>
                         </div>
                     </div>
-                    <div class="game-wrapper">
-                        <h2>🎮 Play Stunt Simulator 2 Free Now</h2>
+                    <div class="game-wrapper" id="play">
+                        <h2>🎮 Play Stunt Simulator Free Now</h2>
+                        <p class="play-note">Playable variant: Stunt Simulator 2. If your browser or network blocks the embed, use the direct play, original Stunt Simulator, multiplayer, or WebGL help links below.</p>
                         <div class="game-container">
-                            <iframe class="game-iframe" src="https://unblocked-games.s3.amazonaws.com/games/2021/unity3/stunt-simulator-2/index.html" frameborder="0" allowfullscreen allow="autoplay; fullscreen" title="Stunt Simulator 2"></iframe>
+                            <iframe class="game-iframe" data-game-src="https://unblocked-games.s3.amazonaws.com/games/2021/unity3/stunt-simulator-2/index.html" src="about:blank" frameborder="0" allowfullscreen allow="autoplay; fullscreen" title="Stunt Simulator playable browser game"></iframe>
+                            <div class="game-status" id="gameStatus" role="status" aria-live="polite">
+                                <strong>Ready to play Stunt Simulator.</strong>
+                                <span>Click Start embedded player. If WebGL or the school network blocks it, use Direct Play or another fallback.</span>
+                                <button class="btn btn-tertiary game-start-btn" id="startGameBtn" type="button">▶ Start Embedded Player</button>
+                            </div>
                         </div>
                     <div class="game-controls">
                         <button class="btn" id="fullscreenBtn">🗖 Enter Fullscreen</button>
                         <button class="btn btn-secondary" onclick="window.location.reload()">🔄 Restart Session</button>
+                        <a class="btn btn-tertiary direct-play-link" href="https://unblocked-games.s3.amazonaws.com/games/2021/unity3/stunt-simulator-2/index.html" target="_blank" rel="noopener">↗ Try Direct Play</a>
                     </div>
-                    <p class="muted" style="margin-top:8px">Need school access or mobile tips? Try <a href="/stunt-simulator-2-unblocked.html">Unblocked</a> or <a href="/stunt-simulator-2-play-google.html">Google/Mobile</a>.</p>
+                    <div class="fallback-grid" id="fallbacks" aria-label="Stunt Simulator fallback options">
+                        <a class="fallback-card direct-play-link" href="https://unblocked-games.s3.amazonaws.com/games/2021/unity3/stunt-simulator-2/index.html" target="_blank" rel="noopener"><strong>Try direct play</strong><span>Open the same Stunt Simulator player in a new tab when iframe embedding is blocked.</span></a>
+                        <a class="fallback-card" href="/games/stunt-simulator"><strong>Original Stunt Simulator</strong><span>Use the classic Stunt Simulator page if the Stunt Simulator 2 build fails.</span></a>
+                        <a class="fallback-card" href="/games/madalin-stunt-cars-2"><strong>Multiplayer stunt cars</strong><span>Play a multiplayer stunt alternative with supercars and large arenas.</span></a>
+                        <a class="fallback-card" href="#webgl-help"><strong>WebGL help</strong><span>Check browser, hardware acceleration, private mode, and mobile compatibility fixes.</span></a>
+                    </div>
+                    </div>
+                    <div class="content-section controls-section" id="controls">
+                        <h2>Stunt Simulator Controls</h2>
+                        <ul class="quick-controls">
+                          <li><strong>Drive:</strong> WASD or Arrow keys</li>
+                          <li><strong>Brake:</strong> Space</li>
+                          <li><strong>Nitro:</strong> Shift</li>
+                          <li><strong>Camera:</strong> C</li>
+                          <li><strong>Goal:</strong> chain ramps, flips, drifts, and landings across stunt maps.</li>
+                        </ul>
                     </div>
                     <div class="content-section" id="how-to-play">
-                        <h2>Stunt Simulator 2 Guide</h2>
+                        <h2>Stunt Simulator Guide</h2>
+                        <p>Stunt Simulator is the exact task on this page: open a free browser stunt driving game, start fast with no download, and keep fallback links nearby when WebGL or iframe loading fails. The embedded player is Stunt Simulator 2, a playable variant with 10 vehicles, 6 maps, nitro jumps, camera switching, and quick restarts for practicing hard landings.</p>
                         <p>Stunt Simulator 2 drops you into six colossal stunt districts split between neon hangars, canyon mega ramps, and open desert airfields the instant the camera fades in, so Stunt Simulator 2 feels alive before you touch the throttle. Stunt Simulator 2 keeps adrenaline spiking by mixing arcade freedom with precision physics so every stunt feels cinematic yet controllable. Because Stunt Simulator 2 never locks you into scripted routes, you spend every minute plotting the next impossible stunt line. This freedom means Stunt Simulator 2 behaves more like a living stunt studio than a linear racing campaign.</p>
 <p>Stunt Simulator 2 rewards curiosity by letting you swap vehicles instantly, reset anywhere, and chain stunts without loading screens. Stunt Simulator 2 celebrates experimentation by resetting you instantly after every crash, letting momentum stay hot during a session. The more time you invest in Stunt Simulator 2, the more fluid your personal stunt language becomes as you layer tricks. Soon Stunt Simulator 2 transforms quick warm-up laps into shareable highlight reels.</p>
 <p>Stunt Simulator 2 makes onboarding painless because a guided training tour teaching throttle bursts, camera tricks, and recovery resets. Stunt Simulator 2 layers each tutorial tip with animated arrows so you never wonder which key to tap. Whenever Stunt Simulator 2 senses you wiping out repeatedly, it reminds you that a single button resets the car without punishing load screens. That supportive coaching keeps beginners engaged while veterans rush back into the air.</p>
@@ -162,7 +177,7 @@
   <li>Content: 10 vehicles and 6 stunt maps, from stadium bowls to mega ramps.</li>
   <li>No download: plays in browser and works on Chromebooks and school networks (unblocked).</li>
   <li>Tips: tap nitro before the jump for distance; hold during flips to keep rotation smooth.</li>
-  
+
 </ul>
 
                         <!-- Add rich results with structured FAQ -->
@@ -171,13 +186,13 @@
                           "@context": "https://schema.org",
                           "@type": "FAQPage",
                           "mainEntity": [
-                            {"@type":"Question","name":"Do I need to download Stunt Simulator 2?","acceptedAnswer":{"@type":"Answer","text":"No. It runs directly in your web browser with no download or login required."}},
+                            {"@type":"Question","name":"Do I need to download Stunt Simulator?","acceptedAnswer":{"@type":"Answer","text":"No. Stunt Simulator runs directly in your browser with no download or login required."}},
                             {"@type":"Question","name":"What are the controls?","acceptedAnswer":{"@type":"Answer","text":"WASD or Arrow keys to drive, Space to brake, C to change camera, and Shift for nitro."}},
                             {"@type":"Question","name":"Is there an unblocked version?","acceptedAnswer":{"@type":"Answer","text":"Yes. This page plays in the browser and usually works on school networks (unblocked)."}},
-                            {"@type":"Question","name":"Does it support controllers?","acceptedAnswer":{"@type":"Answer","text":"Yes. Standard gamepads are detected automatically, controls can be remapped, and keyboard play stays available."}},
-                            {"@type":"Question","name":"How many vehicles are in Stunt Simulator 2?","acceptedAnswer":{"@type":"Answer","text":"Stunt Simulator 2 features ten drivable vehicles and lets you switch between them during play."}},
-                            {"@type":"Question","name":"Are there objectives in Stunt Simulator 2?","acceptedAnswer":{"@type":"Answer","text":"You can free‑roam or take on skill trials, time attacks, and combo challenges."}},
-                            {"@type":"Question","name":"What tips help beginners in Stunt Simulator 2?","acceptedAnswer":{"@type":"Answer","text":"Learn reset hotkeys, feather nitro for flips, and explore each map before chaining big combos."}}
+                            {"@type":"Question","name":"What is the difference between Stunt Simulator and Stunt Simulator 2?","acceptedAnswer":{"@type":"Answer","text":"This homepage targets the Stunt Simulator intent and embeds Stunt Simulator 2 as the current playable variant. The Original Stunt Simulator fallback is linked when you want the classic page."}},
+                            {"@type":"Question","name":"Does Stunt Simulator work on mobile?","acceptedAnswer":{"@type":"Answer","text":"The page is mobile-first with visible Play, Fullscreen, Restart, and fallback links. WebGL performance still depends on your browser and device."}},
+                            {"@type":"Question","name":"What if I see a WebGL or game.json compatibility error?","acceptedAnswer":{"@type":"Answer","text":"Use Try direct play, switch browsers, enable hardware acceleration, leave private mode, or choose the Original Stunt Simulator / Multiplayer fallback links."}},
+                            {"@type":"Question","name":"Is there multiplayer?","acceptedAnswer":{"@type":"Answer","text":"The embedded Stunt Simulator 2 variant is focused on stunt driving. Use the Multiplayer stunt cars fallback for a multiplayer alternative."}}
                           ]
                         }
                         </script>
@@ -186,21 +201,21 @@
                         <h2>Stunt Games Spotlight</h2>
                         <p>Push gravity to its limits with browser stunt experiences tailored for thrill seekers.</p>
                         <div class="games-grid">
-                            <a href="/games/madalin-stunt-cars-2.html" class="game-card">
+                            <a href="/games/madalin-stunt-cars-2" class="game-card">
     <div class="play-badge">Explore</div>
     <div class="game-card-content">
         <h3>Madalin Stunt Cars 2</h3>
         <p>Multiplayer stunt arenas with 30+ supercars and massive loops.</p>
     </div>
 </a>
-<a href="/games/gt-cars-mega-ramps.html" class="game-card">
+<a href="/games/gt-cars-mega-ramps" class="game-card">
     <div class="play-badge">Explore</div>
     <div class="game-card-content">
         <h3>GT Cars Mega Ramps</h3>
         <p>Sky-high mega ramps and modular stunt towers for precision flyers.</p>
     </div>
 </a>
-<a href="/games/hyper-cars-ramp-crash.html" class="game-card">
+<a href="/games/hyper-cars-ramp-crash" class="game-card">
     <div class="play-badge">Explore</div>
     <div class="game-card-content">
         <h3>Hyper Cars Ramp Crash</h3>
@@ -213,21 +228,21 @@
                         <h2>High-Speed Racing</h2>
                         <p>Switch gears into competitive circuits and street races packed with neon flair.</p>
                         <div class="games-grid">
-                            <a href="/games/night-city-racing.html" class="game-card">
+                            <a href="/games/night-city-racing" class="game-card">
     <div class="play-badge">Explore</div>
     <div class="game-card-content">
         <h3>Night City Racing</h3>
         <p>Neon streets, rival crews, and fully tuned hypercars.</p>
     </div>
 </a>
-<a href="/games/mr-racer-stunt-mania.html" class="game-card">
+<a href="/games/mr-racer-stunt-mania" class="game-card">
     <div class="play-badge">Explore</div>
     <div class="game-card-content">
         <h3>MR RACER Stunt Mania</h3>
         <p>Boss duels, nitro tournaments, and cinematic stunt battles.</p>
     </div>
 </a>
-<a href="/games/rally-racer-dirt.html" class="game-card">
+<a href="/games/rally-racer-dirt" class="game-card">
     <div class="play-badge">Explore</div>
     <div class="game-card-content">
         <h3>Rally Racer Dirt</h3>
@@ -240,21 +255,21 @@
                         <h2>Bike & Drift Legends</h2>
                         <p>Chase perfect angles on two wheels and sideways sliders.</p>
                         <div class="games-grid">
-                            <a href="/games/moto-x3m.html" class="game-card">
+                            <a href="/games/moto-x3m" class="game-card">
     <div class="play-badge">Explore</div>
     <div class="game-card-content">
         <h3>Moto X3M</h3>
         <p>Classic motocross platformer with deadly traps and gold medals.</p>
     </div>
 </a>
-<a href="/games/moto-x3m-spooky-land.html" class="game-card">
+<a href="/games/moto-x3m-spooky-land" class="game-card">
     <div class="play-badge">Explore</div>
     <div class="game-card-content">
         <h3>Moto X3M 6: Spooky Land</h3>
         <p>Halloween twists on Moto X3M with candy collectibles.</p>
     </div>
 </a>
-<a href="/games/crazy-drift.html" class="game-card">
+<a href="/games/crazy-drift" class="game-card">
     <div class="play-badge">Explore</div>
     <div class="game-card-content">
         <h3>Crazy Drift</h3>
@@ -263,29 +278,33 @@
 </a>
                         </div>
                     </div>
+                    <div class="content-section" id="webgl-help">
+                        <h2>WebGL Help & Loading Fixes</h2>
+                        <p>If the embedded player shows a WebGL compatibility or build loading problem, do not count that as a successful game load. Try direct play in a new tab, enable hardware acceleration, update Chrome/Edge/Firefox, disable strict private browsing extensions, or use one of the fallback game pages above.</p>
+                    </div>
                     <div class="content-section" id="faq">
-                        <h2>Stunt Simulator 2 Player FAQ</h2>
+                        <h2>Stunt Simulator Player FAQ</h2>
                         <div class="faq-item">
-    <h3>How many vehicles are in Stunt Simulator 2?</h3>
-    <p>Stunt Simulator 2 launches with ten vehicles ranging from compact speedsters to hulking APCs, and Stunt Simulator 2 lets you swap instantly mid-session.</p>
+    <h3>What is the difference between Stunt Simulator and Stunt Simulator 2?</h3>
+    <p>This homepage matches the broader Stunt Simulator search intent. The embedded playable build is Stunt Simulator 2, while the original Stunt Simulator page remains available as a fallback.</p>
 </div>
 <div class="faq-item">
-    <h3>Are there objectives in Stunt Simulator 2?</h3>
-    <p>Stunt Simulator 2 features skill trials, time attacks, and combo challenges, yet Stunt Simulator 2 keeps freeroam unlocked for relaxed sessions.</p>
+    <h3>Can I play Stunt Simulator on mobile?</h3>
+    <p>Yes, the Play area, Fullscreen, Restart, and fallback links are visible on a 390px mobile viewport. WebGL performance depends on your device, browser, and network policy.</p>
 </div>
 <div class="faq-item">
-    <h3>Does Stunt Simulator 2 work with controllers?</h3>
-    <p>Stunt Simulator 2 detects modern gamepads automatically, and Stunt Simulator 2 provides remapping so you can dial in perfect controls.</p>
+    <h3>What should I do if WebGL or game.json fails?</h3>
+    <p>Use Try Direct Play first. If it still fails, enable hardware acceleration, update your browser, leave private mode, or choose Original Stunt Simulator / Multiplayer from the fallback cards.</p>
 </div>
 <div class="faq-item">
-    <h3>What tips help beginners in Stunt Simulator 2?</h3>
-    <p>Stunt Simulator 2 rewards learning reset hotkeys, feathering nitro, and exploring each map slowly before chaining huge combos.</p>
+    <h3>Is there a multiplayer stunt option?</h3>
+    <p>The current embed is a single-player stunt variant. For multiplayer stunt driving, open the Multiplayer stunt cars fallback linked above.</p>
 </div>
                     </div>
                     <div class="content-section">
                         <h2>More Games Like Stunt Simulator 2</h2>
                         <div class="games-grid">
-                            <a href="/games/stunt-simulator.html" class="game-card">
+                            <a href="/games/stunt-simulator" class="game-card">
     <div class="play-badge">Play Now</div>
     <img loading="lazy" src="https://unblocked-games.s3.amazonaws.com/media/posts/18/stuntsimulator.jpg" alt="Stunt Simulator">
     <div class="game-card-content">
@@ -293,7 +312,7 @@
         <p>Explore more browser stunt racing challenges right away.</p>
     </div>
 </a>
-<a href="/games/madalin-stunt-cars-2.html" class="game-card">
+<a href="/games/madalin-stunt-cars-2" class="game-card">
     <div class="play-badge">Play Now</div>
     <img loading="lazy" src="https://imgs.crazygames.com/games/madalin-stunt-cars-2/cover_16x9-1695113654654.png?metadata=none&quality=75&width=400" alt="Madalin Stunt Cars 2">
     <div class="game-card-content">
@@ -301,7 +320,7 @@
         <p>Explore more browser stunt racing challenges right away.</p>
     </div>
 </a>
-<a href="/games/gt-cars-mega-ramps.html" class="game-card">
+<a href="/games/gt-cars-mega-ramps" class="game-card">
     <div class="play-badge">Play Now</div>
     <img loading="lazy" src="https://imgs.crazygames.com/gt-cars-mega-ramps_16x9/20241106064118/gt-cars-mega-ramps_16x9-cover?metadata=none&quality=75&width=400" alt="GT Cars Mega Ramps">
     <div class="game-card-content">
@@ -325,9 +344,11 @@
                             <li><a href="/">Home</a></li>
                             <li><a href="/#how-to-play">How to Play</a></li>
                             <li><a href="/#faq">FAQ</a></li>
-                            <li><a href="/stunt-simulator-2-unblocked.html">Unblocked</a></li>
-                            <li><a href="/stunt-simulator-2-play-google.html">Google/Mobile</a></li>
-                        </ul>
+                            <li><a href="/stunt-simulator-2-unblocked">Unblocked</a></li>
+                            <li><a href="/stunt-simulator-2-play-google">Google/Mobile</a></li>
+
+                            <li><a href="/privacy">Privacy</a></li>
+                            <li><a href="/terms">Terms</a></li></ul>
                     </div>
                     <div class="footer-section">
                         <h3 class="muted">Recommended Sites</h3>
@@ -367,7 +388,7 @@
               "@type": "BreadcrumbList",
               "itemListElement": [
                 {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://stunt-simulator.com/"},
-                {"@type": "ListItem", "position": 2, "name": "Stunt Simulator 2", "item": "https://stunt-simulator.com/"}
+                {"@type": "ListItem", "position": 2, "name": "Stunt Simulator", "item": "https://stunt-simulator.com/"}
               ]
             }
             </script>
