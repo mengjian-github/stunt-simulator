@@ -716,6 +716,39 @@ a:hover {
     background: rgba(255, 70, 85, 0.07);
 }
 
+.intent-panel {
+    border-color: rgba(255, 215, 0, 0.24);
+}
+
+.intent-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.9rem;
+}
+
+.intent-card {
+    display: flex;
+    min-height: 132px;
+    flex-direction: column;
+    gap: 0.45rem;
+    padding: 1rem;
+    border: 1px solid rgba(255, 215, 0, 0.28);
+    border-radius: 12px;
+    background: linear-gradient(145deg, rgba(255, 215, 0, 0.1), rgba(255, 70, 85, 0.07));
+}
+
+.intent-card strong {
+    color: var(--gold);
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.intent-card span {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.93rem;
+    line-height: 1.55;
+}
+
 .legal-page {
     width: min(1040px, calc(100% - 32px));
     margin: 2rem auto;
@@ -817,6 +850,10 @@ a:hover {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .intent-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .content-section {
         padding: 1.5rem;
     }
@@ -886,6 +923,15 @@ a:hover {
     }
 
     .fallback-card {
+        min-height: auto;
+        padding: 0.75rem;
+    }
+
+    .intent-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .intent-card {
         min-height: auto;
         padding: 0.75rem;
     }

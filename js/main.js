@@ -14,7 +14,7 @@
         gameSlug = document.body.dataset.gameSlug || 'stunt-simulator';
         gameVariant = document.body.dataset.gameVariant || gameSlug;
         window.__moxiReviewProps = {
-            moxi_review: 'auto_optimization_20260701',
+            moxi_review: 'auto_optimization_20260702',
             viewport_bucket: getViewportBucket()
         };
         initFullscreen();
@@ -213,6 +213,12 @@
                         variant: gameVariant,
                         source: 'embedded_iframe_start_button'
                     });
+                    trackEvent('tool_start', {
+                        event_category: 'game',
+                        event_label: gameSlug,
+                        variant: gameVariant,
+                        source: 'embedded_iframe_start_button'
+                    });
                     window.setTimeout(function() {
                         if (playStarted && !iframeLoaded) {
                             showGameFallback('embed_timeout', 'The player is taking too long. Try Direct Play, Original Stunt Simulator, Multiplayer, or WebGL Help.');
@@ -229,6 +235,12 @@
                     gameStatus.innerHTML = '<strong>Player frame loaded.</strong><span>If the Unity/WebGL screen inside the frame still reports a compatibility error, use Try Direct Play or the fallback cards.</span>';
                 }
                 trackEvent('iframe_loaded', {
+                    event_category: 'game',
+                    event_label: gameSlug,
+                    variant: gameVariant,
+                    source: 'iframe_load_event'
+                });
+                trackEvent('game_loaded', {
                     event_category: 'game',
                     event_label: gameSlug,
                     variant: gameVariant,

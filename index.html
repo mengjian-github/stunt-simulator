@@ -153,6 +153,15 @@
                           <li><strong>Goal:</strong> chain ramps, flips, drifts, and landings across stunt maps.</li>
                         </ul>
                     </div>
+                    <div class="content-section intent-panel" id="best-way-to-play">
+                        <h2>Best Way to Play Stunt Simulator Today</h2>
+                        <div class="intent-grid">
+                            <div class="intent-card"><strong>Start here</strong><span>Click Start Embedded Player above. This keeps the session on stunt-simulator.com and lets analytics separate play_start, game_loaded, and qualified_play_session.</span></div>
+                            <div class="intent-card"><strong>If it hangs</strong><span>Use Try Direct Play when the school network, iframe policy, or WebGL build loader blocks the embedded frame.</span></div>
+                            <div class="intent-card"><strong>If you want classic</strong><span>Open Original Stunt Simulator for the older arena build, then return here for Stunt Simulator 2 fallback links.</span></div>
+                            <div class="intent-card"><strong>If you are on mobile</strong><span>Use the Google/Mobile guide for landscape mode, add-to-home-screen steps, and controller expectations.</span></div>
+                        </div>
+                    </div>
                     <div class="content-section" id="how-to-play">
                         <h2>Stunt Simulator Guide</h2>
                         <p>Stunt Simulator is the exact task on this page: open a free browser stunt driving game, start fast with no download, and keep fallback links nearby when WebGL or iframe loading fails. The embedded player is Stunt Simulator 2, a playable variant with 10 vehicles, 6 maps, nitro jumps, camera switching, and quick restarts for practicing hard landings.</p>
@@ -399,12 +408,21 @@
               "@context": "https://schema.org",
               "@type": "WebSite",
               "name": "Stunt Simulator",
-              "url": "https://stunt-simulator.com/",
-              "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https://stunt-simulator.com/?q={search_term_string}",
-                "query-input": "required name=search_term_string"
-              }
+              "url": "https://stunt-simulator.com/"
+            }
+            </script>
+            <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "HowTo",
+              "name": "How to play Stunt Simulator online",
+              "description": "Start the embedded Stunt Simulator player, use direct play if the iframe is blocked, then try the original or mobile fallback pages when needed.",
+              "step": [
+                {"@type": "HowToStep", "name": "Start the embedded player", "text": "Click Start Embedded Player in the Play Stunt Simulator section."},
+                {"@type": "HowToStep", "name": "Use direct play if blocked", "text": "If the frame does not load after a few seconds, open Try Direct Play in a new tab."},
+                {"@type": "HowToStep", "name": "Switch fallback route", "text": "Choose Original Stunt Simulator, Multiplayer stunt cars, or WebGL help based on the loading problem."},
+                {"@type": "HowToStep", "name": "Play with keyboard controls", "text": "Use WASD or Arrow keys to drive, Space to brake, Shift for nitro, and C for camera."}
+              ]
             }
             </script>
         </body>

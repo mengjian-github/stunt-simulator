@@ -7,7 +7,7 @@
     <script>
     document.addEventListener("DOMContentLoaded",function(){
       var iframe=document.querySelector(".game-iframe");
-      if(iframe){iframe.addEventListener("load",function(){plausible("play_start",{props:{game:"stunt-simulator-2"}})});}
+      if(iframe){iframe.addEventListener("load",function(){plausible("play_start",{props:{game:"stunt-simulator-2",surface:"unblocked"}});plausible("game_loaded",{props:{game:"stunt-simulator-2",surface:"unblocked"}})});}
       var fsBtn=document.getElementById("fullscreenBtn");
       if(fsBtn){fsBtn.addEventListener("click",function(){plausible("fullscreen_click",{props:{game:"stunt-simulator-2"}})});}
       document.querySelectorAll(".game-card").forEach(function(card){
