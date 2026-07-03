@@ -1,0 +1,7 @@
+https://www.stunt-simulator.com/ https://stunt-simulator.com/ 301
+https://www.stunt-simulator.com/* https://stunt-simulator.com/:splat 301
+http://www.stunt-simulator.com/ https://stunt-simulator.com/ 301
+http://www.stunt-simulator.com/* https://stunt-simulator.com/:splat 301
+http://stunt-simulator.com/ https://stunt-simulator.com/ 301
+http://stunt-simulator.com/* https://stunt-simulator.com/:splat 301
+/*.html /:splat 301
