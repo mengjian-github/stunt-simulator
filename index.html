@@ -162,6 +162,26 @@
                             <div class="intent-card"><strong>If you are on mobile</strong><span>Use the Google/Mobile guide for landscape mode, add-to-home-screen steps, and controller expectations.</span></div>
                         </div>
                     </div>
+                    <div class="content-section answer-first-panel" id="stunt-simulator-answer">
+                        <p class="eyebrow">Quick answer for stunt simulator players</p>
+                        <h2>What You Can Do in Stunt Simulator</h2>
+                        <p>Stunt Simulator is a free browser stunt driving game where the main task is to pick a vehicle, build speed, launch from ramps, rotate in the air, and land cleanly enough to keep the run going. This page keeps the playable embed, direct play fallback, original classic route, mobile guidance, controls, WebGL help, and related stunt games in one place.</p>
+                        <div class="answer-grid">
+                            <div class="answer-card"><strong>Vehicles</strong><span>Use lighter cars for flips and recovery, heavier cars for long jumps, crashes, and stable landings.</span></div>
+                            <div class="answer-card"><strong>Maps</strong><span>Practice stadium bowls, desert runways, wall rides, mega ramps, loops, and long stunt chains.</span></div>
+                            <div class="answer-card"><strong>Controls</strong><span>WASD/Arrow keys drive, Space brakes, Shift boosts, and C changes camera before narrow landings.</span></div>
+                            <div class="answer-card"><strong>Unblocked</strong><span>If the embed fails at school or on a Chromebook, open Direct Play first, then try the classic or mobile route.</span></div>
+                        </div>
+                    </div>
+                    <div class="content-section loading-checklist" id="loading-checklist">
+                        <h2>Loading & WebGL Checklist</h2>
+                        <ol class="checklist-steps">
+                            <li><strong>Click Start Embedded Player.</strong><span>This creates the play_start and tool_start events and avoids counting idle pageviews as real play.</span></li>
+                            <li><strong>Wait for Player frame loaded.</strong><span>If the iframe loads, the page records game_loaded and keeps watching for a qualified 45-second play session.</span></li>
+                            <li><strong>Use Direct Play after a timeout.</strong><span>Do this before refreshing repeatedly; it tells us the embed path may be blocked while the game itself still works.</span></li>
+                            <li><strong>Switch fallback if needed.</strong><span>Original Stunt Simulator, Multiplayer stunt cars, and Google/Mobile pages cover the most common blocked or mobile sessions.</span></li>
+                        </ol>
+                    </div>
                     <div class="content-section" id="how-to-play">
                         <h2>Stunt Simulator Guide</h2>
                         <p>Use this page as the fastest route into a free browser stunt driving session: start the embedded player, keep fallback links close, and switch routes if a school network, WebGL setting, or iframe policy blocks the game. The current playable build is a modern sequel-style variant with ramp arenas, multiple vehicles, nitro jumps, camera switching, and quick resets for practicing hard landings.</p>

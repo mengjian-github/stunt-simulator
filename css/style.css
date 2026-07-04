@@ -766,6 +766,69 @@ a:hover {
     line-height: 1.55;
 }
 
+.answer-first-panel,
+.loading-checklist {
+    border-color: rgba(22, 199, 154, 0.28);
+    background: linear-gradient(145deg, rgba(30, 30, 48, 0.98), rgba(15, 15, 30, 0.98));
+}
+
+.answer-grid,
+.checklist-steps {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.9rem;
+    margin: 1rem 0 0 !important;
+}
+
+.answer-card,
+.checklist-steps li {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    min-height: 136px;
+    padding: 1rem;
+    border: 1px solid rgba(22, 199, 154, 0.35);
+    border-radius: 12px;
+    background: rgba(22, 199, 154, 0.08);
+}
+
+.answer-card strong,
+.checklist-steps strong {
+    color: var(--accent);
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.answer-card span,
+.checklist-steps span {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.93rem;
+    line-height: 1.55;
+}
+
+.game-status .status-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 0.35rem;
+}
+
+.game-status .status-actions a {
+    padding: 0.4rem 0.65rem;
+    border: 1px solid rgba(255, 215, 0, 0.45);
+    border-radius: 999px;
+    color: var(--gold);
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.game-status .status-actions a:hover {
+    background: rgba(255, 215, 0, 0.16);
+    color: #fff3a1;
+}
+
 .legal-page {
     width: min(1040px, calc(100% - 32px));
     margin: 2rem auto;
@@ -871,6 +934,11 @@ a:hover {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .answer-grid,
+    .checklist-steps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .content-section {
         padding: 1.5rem;
     }
@@ -946,6 +1014,17 @@ a:hover {
 
     .intent-grid {
         grid-template-columns: 1fr;
+    }
+
+    .answer-grid,
+    .checklist-steps {
+        grid-template-columns: 1fr;
+    }
+
+    .answer-card,
+    .checklist-steps li {
+        min-height: auto;
+        padding: 0.75rem;
     }
 
     .intent-card {

@@ -14,7 +14,7 @@
         gameSlug = document.body.dataset.gameSlug || 'stunt-simulator';
         gameVariant = document.body.dataset.gameVariant || gameSlug;
         window.__moxiReviewProps = {
-            moxi_review: 'auto_optimization_20260703',
+            moxi_review: 'auto_optimization_20260704',
             viewport_bucket: getViewportBucket()
         };
         initFullscreen();
@@ -205,7 +205,7 @@
                         gameIframe.setAttribute('src', src);
                     }
                     if (gameStatus) {
-                        gameStatus.innerHTML = '<strong>Loading the Stunt Simulator player…</strong><span>If WebGL or the school network blocks the embed, use a fallback below instead of staring at an error screen.</span>';
+                        gameStatus.innerHTML = '<strong>Loading the Stunt Simulator player…</strong><span>If WebGL or the school network blocks the embed, use a fallback below instead of staring at an error screen.</span><div class="status-actions"><a href="#loading-checklist">Loading checklist</a><a class="direct-play-link" href="https://unblocked-games.s3.amazonaws.com/games/2021/unity3/stunt-simulator-2/index.html" target="_blank" rel="noopener">Direct play</a></div>';
                     }
                     trackEvent('play_start', {
                         event_category: 'game',
@@ -232,7 +232,7 @@
                 iframeLoaded = true;
                 if (gameStatus) {
                     gameStatus.classList.add('is-loaded');
-                    gameStatus.innerHTML = '<strong>Player frame loaded.</strong><span>If the Unity/WebGL screen inside the frame still reports a compatibility error, use Try Direct Play or the fallback cards.</span>';
+                    gameStatus.innerHTML = '<strong>Player frame loaded.</strong><span>If the Unity/WebGL screen inside the frame still reports a compatibility error, use Try Direct Play or the fallback cards.</span><div class="status-actions"><a href="#controls">Controls</a><a href="#fallbacks">Fallbacks</a></div>';
                 }
                 trackEvent('iframe_loaded', {
                     event_category: 'game',
@@ -313,10 +313,31 @@
             });
         }
 
+        if (document.getElementById('loading-checklist')) {
+            trackEvent('loading_checklist_view', {
+                event_category: 'game_fallback',
+                event_label: gameSlug,
+                variant: gameVariant,
+                source: 'homepage_loading_help'
+            });
+        }
+
+        document.addEventListener('click', function(event) {
+            const statusLink = event.target.closest('.game-status .status-actions a');
+            if (!statusLink) return;
+            trackEvent('game_status_action_click', {
+                event_category: 'game_fallback',
+                event_label: statusLink.textContent.trim(),
+                game: gameSlug,
+                variant: gameVariant,
+                destination: statusLink.getAttribute('href') || ''
+            });
+        });
+
         function showGameFallback(reason, message) {
             if (gameStatus) {
                 gameStatus.classList.add('is-error');
-                gameStatus.innerHTML = '<strong>Having trouble loading Stunt Simulator?</strong><span>' + message + '</span>';
+                gameStatus.innerHTML = '<strong>Having trouble loading Stunt Simulator?</strong><span>' + message + '</span><div class="status-actions"><a class="direct-play-link" href="https://unblocked-games.s3.amazonaws.com/games/2021/unity3/stunt-simulator-2/index.html" target="_blank" rel="noopener">Direct play</a><a href="/games/stunt-simulator">Classic</a><a href="/games/madalin-stunt-cars-2">Multiplayer</a><a href="#webgl-help">WebGL help</a></div>';
             }
             trackEvent('game_error', {
                 event_category: 'game',
