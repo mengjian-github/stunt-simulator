@@ -14,7 +14,7 @@
         gameSlug = document.body.dataset.gameSlug || 'stunt-simulator';
         gameVariant = document.body.dataset.gameVariant || gameSlug;
         window.__moxiReviewProps = {
-            moxi_review: 'auto_optimization_20260704',
+            moxi_review: 'auto_optimization_20260705',
             viewport_bucket: getViewportBucket()
         };
         initFullscreen();
@@ -279,6 +279,18 @@
                     event_label: gameSlug,
                     variant: gameVariant,
                     destination: this.getAttribute('href') || ''
+                });
+            });
+        });
+
+        document.querySelectorAll('.intent-card, .answer-card').forEach(function(card) {
+            card.addEventListener('click', function() {
+                trackEvent('seo_help_card_click', {
+                    event_category: 'content_engagement',
+                    event_label: this.querySelector('strong')?.textContent || 'help_card',
+                    game: gameSlug,
+                    variant: gameVariant,
+                    location: this.closest('.intent-panel') ? 'intent_panel' : 'answer_panel'
                 });
             });
         });

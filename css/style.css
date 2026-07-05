@@ -829,6 +829,35 @@ a:hover {
     color: #fff3a1;
 }
 
+.anchor-offset {
+    display: block;
+    height: 0;
+    scroll-margin-top: 120px;
+}
+
+.longtail-note {
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.95rem;
+    margin-top: 0.75rem;
+}
+
+.content-section .eyebrow {
+    color: var(--gold);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.45rem;
+    text-transform: uppercase;
+}
+
+.controls-section .quick-controls strong {
+    color: var(--gold);
+}
+
+.game-controls .direct-play-link {
+    white-space: nowrap;
+}
+
 .legal-page {
     width: min(1040px, calc(100% - 32px));
     margin: 2rem auto;

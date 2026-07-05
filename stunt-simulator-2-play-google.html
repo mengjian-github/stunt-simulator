@@ -17,8 +17,8 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stunt Simulator 2 — Play Online (Web Version) | Google Play Info</title>
-    <meta name="description" content="Play Stunt Simulator 2 free in your browser — no download. Learn about mobile support, touch controls, and how to add it to your Android home screen.">
+    <title>Stunt Simulator 2 Play Google — Web & Mobile Guide</title>
+    <meta name="description" content="Play Stunt Simulator 2 in your browser with Google/Android mobile tips, landscape controls, home-screen shortcut steps, and no-download fallback guidance.">
     <link rel="canonical" href="https://stunt-simulator.com/stunt-simulator-2-play-google">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
@@ -61,6 +61,8 @@
             <nav class="nav">
                 <ul>
                     <li><a href="/">Home</a></li>
+                    <li><a href="#mobile-controls">Mobile controls</a></li>
+                    <li><a href="#google-shortcut">Google shortcut</a></li>
                     <li><a href="/stunt-simulator-2-unblocked">Unblocked</a></li>
                     <li><a href="#faq">FAQ</a></li>
                 </ul>
@@ -84,37 +86,56 @@
             </div>
             <div class="game-wrapper">
                 <h2>🎮 Play Stunt Simulator 2 Online</h2>
+                <p class="play-note">This is the web version for Google/Android searches: play in Chrome, rotate to landscape, and add the page to your home screen as a shortcut when you want app-like access.</p>
                 <div class="game-container">
                     <iframe class="game-iframe" src="https://unblocked-games.s3.amazonaws.com/games/2021/unity3/stunt-simulator-2/index.html" frameborder="0" allowfullscreen allow="autoplay; fullscreen" title="Stunt Simulator 2"></iframe>
                 </div>
                 <div class="game-controls">
                     <button class="btn" id="fullscreenBtn">🗖 Enter Fullscreen</button>
                     <button class="btn btn-secondary" onclick="window.location.reload()">🔄 Restart</button>
+                    <a class="btn btn-tertiary direct-play-link" href="https://unblocked-games.s3.amazonaws.com/games/2021/unity3/stunt-simulator-2/index.html" target="_blank" rel="noopener">↗ Direct Play</a>
                 </div>
             </div>
 
-            <div class="content-section">
-                <h2>Playing on Mobile</h2>
-                <ul>
-                    <li>Open this page in Chrome (Android) or Safari (iOS).</li>
-                    <li>Rotate to landscape for better controls.</li>
-                    <li>Use a Bluetooth controller for the best experience; keyboard is for desktop.</li>
+            <div class="content-section controls-section" id="mobile-controls">
+                <h2>Playing Stunt Simulator 2 on Mobile</h2>
+                <ul class="quick-controls">
+                    <li><strong>Browser:</strong> Chrome on Android, Safari on iOS</li>
+                    <li><strong>View:</strong> Rotate to landscape before launch</li>
+                    <li><strong>Input:</strong> Bluetooth controller is best for driving</li>
+                    <li><strong>Performance:</strong> Close heavy tabs before WebGL loads</li>
+                    <li><strong>Fallback:</strong> Use Direct Play if the embed stalls</li>
                 </ul>
+            </div>
 
-                <h2>Add To Home Screen (PWA‑like Shortcut)</h2>
-                <ol>
-                    <li>Android Chrome: Menu → Add to Home screen.</li>
-                    <li>iOS Safari: Share → Add to Home Screen.</li>
-                </ol>
+            <div class="content-section intent-panel" id="google-shortcut">
+                <p class="eyebrow">Google / Android intent</p>
+                <h2>Add Stunt Simulator 2 to Your Phone Home Screen</h2>
+                <div class="intent-grid">
+                    <div class="intent-card"><strong>Android Chrome</strong><span>Open the page, tap the three-dot menu, choose Add to Home screen, then launch it like a shortcut.</span></div>
+                    <div class="intent-card"><strong>iOS Safari</strong><span>Use Share → Add to Home Screen. The page still opens in Safari because this is a browser game.</span></div>
+                    <div class="intent-card"><strong>Not Play Store</strong><span>This page is not an official Google Play listing and does not ask you to install an APK.</span></div>
+                    <div class="intent-card"><strong>Controller tip</strong><span>Pair a controller before loading the frame if touch driving feels imprecise on mobile.</span></div>
+                </div>
+            </div>
 
-                <p class="muted">Note: This is the browser version, not an official Google Play listing.</p>
+            <div class="content-section answer-first-panel" id="mobile-troubleshooting">
+                <h2>Mobile Troubleshooting Before You Give Up</h2>
+                <p>Stunt Simulator 2 is a WebGL browser game, so mobile success depends on browser memory, landscape viewport size, and whether the network allows the game source to load. Start with Chrome on Android or Safari on iOS, close heavy apps, rotate to landscape, then launch the frame. If loading stalls, Direct Play is the fastest test because it separates a blocked embed from a playable game source.</p>
+                <div class="answer-grid">
+                    <div class="answer-card"><strong>No APK</strong><span>Do not download unofficial APKs; this route keeps the game inside the browser.</span></div>
+                    <div class="answer-card"><strong>Shortcut only</strong><span>Add to Home Screen creates a launcher icon, not a separate native app.</span></div>
+                    <div class="answer-card"><strong>Input reality</strong><span>Touch is fine for menu taps, but a controller or desktop keyboard gives cleaner stunt control.</span></div>
+                    <div class="answer-card"><strong>Measured path</strong><span>mobile_google_click, direct_play_click, and game_loaded events show which mobile path works.</span></div>
+                </div>
             </div>
 
             <div class="content-section" id="faq">
                 <h2>Google / Mobile — FAQ</h2>
-                <div class="faq-item"><h3>Is there an official Google Play app?</h3><p>This page provides the free web version. Use Chrome on Android to play instantly.</p></div>
+                <div class="faq-item"><h3>Is there an official Google Play app?</h3><p>This page provides the free browser version and is not an official Google Play listing. Use Chrome on Android to play instantly.</p></div>
                 <div class="faq-item"><h3>Does touch work?</h3><p>Touch works for basic UI. For precise driving, we recommend a Bluetooth controller.</p></div>
                 <div class="faq-item"><h3>Will progress save on mobile?</h3><p>Progress is limited in the web build. Use the same browser/profile to keep local settings.</p></div>
+                <div class="faq-item"><h3>Should I download an APK?</h3><p>No. Use the browser version or a home-screen shortcut; unofficial APKs can be unsafe and are outside this site.</p></div>
             </div>
         </main>
     </div>
@@ -141,6 +162,7 @@
         </div>
     </footer>
 
+    <script src="js/main.js"></script>
     <script>
       const frame = document.querySelector('.game-iframe');
       document.getElementById('fullscreenBtn').onclick = () => { if (frame.requestFullscreen) frame.requestFullscreen(); };
@@ -154,7 +176,22 @@
       "mainEntity":[
         {"@type":"Question","name":"Is there a Google Play version?","acceptedAnswer":{"@type":"Answer","text":"This is the free browser version. On Android, open in Chrome and optionally add it to your home screen."}},
         {"@type":"Question","name":"How do I play on mobile?","acceptedAnswer":{"@type":"Answer","text":"Use Chrome (Android) or Safari (iOS), rotate to landscape, and consider a Bluetooth controller for precision."}},
-        {"@type":"Question","name":"Do I need to download anything?","acceptedAnswer":{"@type":"Answer","text":"No. It runs directly in your web browser with no download or account."}}
+        {"@type":"Question","name":"Do I need to download anything?","acceptedAnswer":{"@type":"Answer","text":"No. It runs directly in your web browser with no download or account."}},
+        {"@type":"Question","name":"Should I download a Stunt Simulator 2 APK?","acceptedAnswer":{"@type":"Answer","text":"No. Use the browser version or an add-to-home-screen shortcut instead of unofficial APK downloads."}}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"HowTo",
+      "name":"How to play Stunt Simulator 2 from Google or Android",
+      "description":"Open the browser version, rotate to landscape, add it to your home screen if desired, and use Direct Play when the embedded frame stalls.",
+      "step":[
+        {"@type":"HowToStep","name":"Open the web version","text":"Use Chrome on Android or Safari on iOS and open the Stunt Simulator 2 web route."},
+        {"@type":"HowToStep","name":"Rotate to landscape","text":"Landscape mode gives the game frame and controls more space."},
+        {"@type":"HowToStep","name":"Add a shortcut","text":"Use Add to Home Screen for app-like access without installing an APK."},
+        {"@type":"HowToStep","name":"Use Direct Play if needed","text":"Open Direct Play when the embedded frame is blocked or slow."}
       ]
     }
     </script>
