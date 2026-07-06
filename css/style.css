@@ -766,6 +766,59 @@ a:hover {
     line-height: 1.55;
 }
 
+.route-intent-panel,
+.comparison-panel {
+    border-color: rgba(255, 215, 0, 0.24);
+    background: linear-gradient(145deg, rgba(30, 30, 48, 0.98), rgba(41, 25, 34, 0.95));
+}
+
+.route-grid,
+.comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.9rem;
+    margin-top: 1rem;
+}
+
+.route-card,
+.comparison-grid div {
+    display: flex;
+    min-height: 142px;
+    flex-direction: column;
+    gap: 0.45rem;
+    padding: 1rem;
+    border: 1px solid rgba(255, 215, 0, 0.28);
+    border-radius: 12px;
+    background: rgba(255, 215, 0, 0.08);
+    color: rgba(255, 255, 255, 0.84);
+}
+
+.route-card:hover {
+    border-color: var(--gold);
+    background: rgba(255, 215, 0, 0.15);
+    color: var(--text);
+    transform: translateY(-2px);
+}
+
+.route-card-primary {
+    border-color: rgba(22, 199, 154, 0.45);
+    background: rgba(22, 199, 154, 0.12);
+}
+
+.route-card strong,
+.comparison-grid strong {
+    color: var(--gold);
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.route-card span,
+.comparison-grid span {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.93rem;
+    line-height: 1.55;
+}
+
 .answer-first-panel,
 .loading-checklist {
     border-color: rgba(22, 199, 154, 0.28);
@@ -963,6 +1016,11 @@ a:hover {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .route-grid,
+    .comparison-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .answer-grid,
     .checklist-steps {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1045,6 +1103,11 @@ a:hover {
         grid-template-columns: 1fr;
     }
 
+    .route-grid,
+    .comparison-grid {
+        grid-template-columns: 1fr;
+    }
+
     .answer-grid,
     .checklist-steps {
         grid-template-columns: 1fr;
@@ -1057,6 +1120,12 @@ a:hover {
     }
 
     .intent-card {
+        min-height: auto;
+        padding: 0.75rem;
+    }
+
+    .route-card,
+    .comparison-grid div {
         min-height: auto;
         padding: 0.75rem;
     }

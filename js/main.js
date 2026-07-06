@@ -14,7 +14,7 @@
         gameSlug = document.body.dataset.gameSlug || 'stunt-simulator';
         gameVariant = document.body.dataset.gameVariant || gameSlug;
         window.__moxiReviewProps = {
-            moxi_review: 'auto_optimization_20260705',
+            moxi_review: 'auto_optimization_20260706',
             viewport_bucket: getViewportBucket()
         };
         initFullscreen();
@@ -255,6 +255,14 @@
                             source: 'iframe_visible_45s',
                             value: 45
                         });
+                        trackEvent('conversion_goal', {
+                            event_category: 'game',
+                            event_label: gameSlug,
+                            variant: gameVariant,
+                            goal_type: 'qualified_play_session',
+                            source: 'iframe_visible_45s',
+                            value: 1
+                        });
                     }
                 }, 45000);
             });
@@ -279,6 +287,27 @@
                     event_label: gameSlug,
                     variant: gameVariant,
                     destination: this.getAttribute('href') || ''
+                });
+                trackEvent('conversion_goal', {
+                    event_category: 'game',
+                    event_label: gameSlug,
+                    variant: gameVariant,
+                    goal_type: 'direct_play_fallback',
+                    destination: this.getAttribute('href') || '',
+                    value: 1
+                });
+            });
+        });
+
+        document.querySelectorAll('.route-card, .path-card').forEach(function(card) {
+            card.addEventListener('click', function() {
+                trackEvent('route_intent_click', {
+                    event_category: 'navigation',
+                    event_label: this.querySelector('strong, h3')?.textContent || 'route_card',
+                    destination: this.getAttribute('href') || '',
+                    location: this.closest('[id]')?.id || 'route_grid',
+                    game: gameSlug,
+                    variant: gameVariant
                 });
             });
         });
@@ -401,6 +430,15 @@
                         destination: href,
                         location: this.closest('.footer') ? 'footer' : 'content'
                     });
+                    if (href.includes('utm_campaign=stuntsimulator_owned_network_202607')) {
+                        trackEvent('owned_network_click', {
+                            event_category: 'external_distribution_utm',
+                            event_label: label,
+                            destination: href,
+                            source_site: 'stunt-simulator.com',
+                            campaign: 'stuntsimulator_owned_network_202607'
+                        });
+                    }
                     return;
                 }
 
