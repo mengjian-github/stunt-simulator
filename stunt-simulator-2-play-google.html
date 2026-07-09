@@ -6,6 +6,7 @@
     <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}}; plausible.init()</script>
     <script>
     document.addEventListener("DOMContentLoaded",function(){
+      try {
       var iframe=document.querySelector(".game-iframe");
       if(iframe){iframe.addEventListener("load",function(){plausible("play_start",{props:{game:"stunt-simulator-2",surface:"mobile_google"}});plausible("game_loaded",{props:{game:"stunt-simulator-2",surface:"mobile_google"}})});}
       var fsBtn=document.getElementById("fullscreenBtn");
@@ -13,11 +14,12 @@
       document.querySelectorAll(".game-card").forEach(function(card){
         card.addEventListener("click",function(){plausible("game_card_click",{props:{destination:card.getAttribute("href"),label:card.querySelector("h3")?.textContent||""}})});
       });
+      } catch (e) { if (window.console) console.error('analytics', e); }
     });
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stunt Simulator 2 Play Google — Web & Mobile Guide</title>
+    <title>Stunt Simulator 2 Google Play — Web & Mobile Guide</title>
     <meta name="description" content="Play Stunt Simulator 2 in your browser with Google/Android mobile tips, landscape controls, home-screen shortcut steps, and no-download fallback guidance.">
     <link rel="canonical" href="https://stunt-simulator.com/stunt-simulator-2-play-google">
     <link rel="alternate" type="text/plain" href="https://stunt-simulator.com/llms.txt" title="Stunt Simulator LLM summary">
@@ -51,7 +53,13 @@
       "operatingSystem": "Web",
       "applicationCategory": "GameApplication",
       "genre": "Racing",
-      "description": "Play Stunt Simulator 2 for free in your browser. Learn about mobile support and adding to home screen."
+      "description": "Play Stunt Simulator 2 for free in your browser. Learn about mobile support and adding to home screen.",
+      "dateModified": "2026-07-09",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Stunt Simulator",
+        "url": "https://stunt-simulator.com/"
+      }
     }
     </script>
 </head>
@@ -149,6 +157,16 @@
                 <div class="faq-item"><h3>Will progress save on mobile?</h3><p>Progress is limited in the web build. Use the same browser/profile to keep local settings.</p></div>
                 <div class="faq-item"><h3>Should I download an APK?</h3><p>No. Use the browser version or a home-screen shortcut; unofficial APKs can be unsafe and are outside this site.</p></div>
             </div>
+            <div class="content-section" id="related-stunt-simulator-pages">
+                <h2>Related Stunt Simulator Pages</h2>
+                <p>Browse the full Stunt Simulator hub: free online play, school-safe unblocked route, classic original sandbox, and related stunt games.</p>
+                <div class="route-grid">
+                    <a class="route-card route-card-primary" href="/"><strong>Stunt Simulator Home</strong><span>Main free online player with controls, WebGL help, and related games.</span></a>
+                    <a class="route-card" href="/stunt-simulator-2-unblocked"><strong>Stunt Simulator 2 Unblocked</strong><span>School and Chromebook route with direct-play fallback and WebGL help.</span></a>
+                    <a class="route-card" href="/games/stunt-simulator"><strong>Original Stunt Simulator</strong><span>Classic sandbox arena with the original vehicle roster and maps.</span></a>
+                    <a class="route-card" href="/games/madalin-stunt-cars-2"><strong>Multiplayer Stunt Cars</strong><span>Multiplayer-style stunt arenas with supercars and large maps.</span></a>
+                </div>
+            </div>
         </main>
     </div>
 
@@ -198,12 +216,25 @@
       "@context":"https://schema.org",
       "@type":"HowTo",
       "name":"How to play Stunt Simulator 2 from Google or Android",
+      "dateModified":"2026-07-09",
       "description":"Open the browser version, rotate to landscape, add it to your home screen if desired, and use Direct Play when the embedded frame stalls.",
       "step":[
         {"@type":"HowToStep","name":"Open the web version","text":"Use Chrome on Android or Safari on iOS and open the Stunt Simulator 2 web route."},
         {"@type":"HowToStep","name":"Rotate to landscape","text":"Landscape mode gives the game frame and controls more space."},
         {"@type":"HowToStep","name":"Add a shortcut","text":"Use Add to Home Screen for app-like access without installing an APK."},
         {"@type":"HowToStep","name":"Use Direct Play if needed","text":"Open Direct Play when the embedded frame is blocked or slow."}
+      ]
+    }
+    </script>
+
+    <!-- Breadcrumbs for Google/mobile page -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://stunt-simulator.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Stunt Simulator 2 Google Play", "item": "https://stunt-simulator.com/stunt-simulator-2-play-google"}
       ]
     }
     </script>

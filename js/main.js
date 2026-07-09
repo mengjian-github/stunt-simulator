@@ -14,7 +14,7 @@
         gameSlug = document.body.dataset.gameSlug || 'stunt-simulator';
         gameVariant = document.body.dataset.gameVariant || gameSlug;
         window.__moxiReviewProps = {
-            moxi_review: 'auto_optimization_20260708',
+            moxi_review: 'auto_optimization_20260709',
             viewport_bucket: getViewportBucket()
         };
         initFullscreen();
@@ -23,6 +23,7 @@
         initGameTracking();
         initLazyLoad();
         initScrollSpy();
+        initEngagementTimeEvents();
         welcomeMessage();
     }
 
@@ -182,6 +183,33 @@
         }, 500);
 
         window.addEventListener('scroll', throttledScroll);
+    }
+
+    // ========== Engagement Time Events ==========
+    function initEngagementTimeEvents() {
+        const thresholds = [10, 30, 60, 120, 180, 300];
+        const startTime = Date.now();
+        const fired = {};
+
+        function check() {
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            thresholds.forEach(function(sec) {
+                if (elapsed >= sec && !fired[sec]) {
+                    fired[sec] = true;
+                    trackEvent('engagement_time_seconds', {
+                        event_category: 'engagement',
+                        event_label: sec + 's',
+                        value: sec
+                    });
+                }
+            });
+        }
+
+        const interval = window.setInterval(check, 5000);
+        window.addEventListener('beforeunload', function() {
+            window.clearInterval(interval);
+            check();
+        });
     }
 
     // ========== Game Tracking ==========
@@ -516,22 +544,26 @@
 
     // ========== Utility Functions ==========
     function trackEvent(eventName, params) {
-        params = Object.assign({}, window.__moxiReviewProps || {}, params || {});
-        if (typeof gtag !== 'undefined') {
-            gtag('event', eventName, params);
-        }
+        try {
+            params = Object.assign({}, window.__moxiReviewProps || {}, params || {});
+            if (typeof gtag !== 'undefined') {
+                gtag('event', eventName, params);
+            }
 
-        if (typeof window !== 'undefined' && typeof window.plausible === 'function') {
-            const props = {};
-            Object.entries(params || {}).forEach(([key, value]) => {
-                if (value !== undefined && value !== null) {
-                    props[key] = value;
-                }
-            });
-            props.page = window.location.pathname || '/';
-            props.game = props.game || gameSlug;
-            props.variant = props.variant || gameVariant;
-            window.plausible(eventName, { props });
+            if (typeof window !== 'undefined' && typeof window.plausible === 'function') {
+                const props = {};
+                Object.entries(params || {}).forEach(([key, value]) => {
+                    if (value !== undefined && value !== null) {
+                        props[key] = value;
+                    }
+                });
+                props.page = window.location.pathname || '/';
+                props.game = props.game || gameSlug;
+                props.variant = props.variant || gameVariant;
+                window.plausible(eventName, { props });
+            }
+        } catch (e) {
+            if (window.console) console.error('trackEvent', eventName, e);
         }
     }
 
