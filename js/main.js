@@ -14,17 +14,44 @@
         gameSlug = document.body.dataset.gameSlug || 'stunt-simulator';
         gameVariant = document.body.dataset.gameVariant || gameSlug;
         window.__moxiReviewProps = {
-            moxi_review: 'auto_optimization_20260709',
+            moxi_review: 'auto_optimization_20260710',
             viewport_bucket: getViewportBucket()
         };
         initFullscreen();
         initSmoothScroll();
         initAnalytics();
+        initHeroPlayProxy();
         initGameTracking();
         initLazyLoad();
         initScrollSpy();
         initEngagementTimeEvents();
         welcomeMessage();
+    }
+
+    function initHeroPlayProxy() {
+        document.querySelectorAll('[data-start-proxy="true"]').forEach(function(link) {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                const startGameBtn = document.getElementById('startGameBtn');
+                const playSection = document.getElementById('play');
+                if (playSection) {
+                    playSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                trackEvent('hero_play_cta_click', {
+                    event_category: 'game',
+                    event_label: gameSlug,
+                    variant: gameVariant,
+                    destination: '#play',
+                    source: 'hero_primary_cta'
+                });
+                window.setTimeout(function() {
+                    if (startGameBtn && !startGameBtn.dataset.proxyClicked) {
+                        startGameBtn.dataset.proxyClicked = 'true';
+                        startGameBtn.click();
+                    }
+                }, 260);
+            });
+        });
     }
 
     // ========== Fullscreen Functionality ==========
@@ -233,7 +260,9 @@
                         gameIframe.setAttribute('src', src);
                     }
                     if (gameStatus) {
-                        gameStatus.innerHTML = '<strong>Loading the Stunt Simulator player…</strong><span>If WebGL or the school network blocks the embed, use a fallback below instead of staring at an error screen.</span><div class="status-actions"><a href="#loading-checklist">Loading checklist</a><a class="direct-play-link" href="https://unblocked-games.s3.amazonaws.com/games/2021/unity3/stunt-simulator-2/index.html" target="_blank" rel="noopener">Direct play</a></div>';
+                        gameStatus.classList.remove('is-error', 'is-loaded');
+                        gameStatus.classList.add('is-loading');
+                        gameStatus.innerHTML = '<strong>Loading the Stunt Simulator player…</strong><span>If WebGL or the school network blocks the embed, use a fallback below instead of staring at an error screen.</span><div class="status-actions"><a href="#loading-checklist">Loading checklist</a><a class="direct-play-link" href="https://unblocked-games.s3.amazonaws.com/games/2021/unity3/stunt-simulator-2/index.html" target="_blank" rel="noopener">Direct play</a></div><div class="game-progress" aria-hidden="true"><span></span></div>';
                     }
                     trackEvent('play_start', {
                         event_category: 'game',
@@ -259,6 +288,7 @@
                 if (!playStarted) return;
                 iframeLoaded = true;
                 if (gameStatus) {
+                    gameStatus.classList.remove('is-loading', 'is-error');
                     gameStatus.classList.add('is-loaded');
                     gameStatus.innerHTML = '<strong>Player frame loaded.</strong><span>If the Unity/WebGL screen inside the frame still reports a compatibility error, use Try Direct Play or the fallback cards.</span><div class="status-actions"><a href="#controls">Controls</a><a href="#fallbacks">Fallbacks</a></div>';
                 }
@@ -425,9 +455,16 @@
 
         function showGameFallback(reason, message) {
             if (gameStatus) {
+                gameStatus.classList.remove('is-loading', 'is-loaded');
                 gameStatus.classList.add('is-error');
                 gameStatus.innerHTML = '<strong>Having trouble loading Stunt Simulator?</strong><span>' + message + '</span><div class="status-actions"><a class="direct-play-link" href="https://unblocked-games.s3.amazonaws.com/games/2021/unity3/stunt-simulator-2/index.html" target="_blank" rel="noopener">Direct play</a><a href="/games/stunt-simulator">Classic</a><a href="/games/madalin-stunt-cars-2">Multiplayer</a><a href="#webgl-help">WebGL help</a></div>';
             }
+            trackEvent('fallback_options_revealed', {
+                event_category: 'game_fallback',
+                event_label: gameSlug,
+                variant: gameVariant,
+                reason: reason
+            });
             trackEvent('game_error', {
                 event_category: 'game',
                 event_label: gameSlug,

@@ -2,7 +2,7 @@
 
 Source: https://stunt-simulator.com/
 Canonical home: https://stunt-simulator.com/
-Updated: 2026-07-09
+Updated: 2026-07-10
 
 Stunt Simulator is a free browser stunt driving game hub focused on instant play, keyboard controls, WebGL loading help, school/Chromebook unblocked access, and safe no-download mobile guidance.
 
